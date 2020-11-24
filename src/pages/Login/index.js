@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
-// import { Form } from "@unform/mobile";
+import { KeyboardAvoidingView, Platform, Dimensions } from "react-native";
 import { Feather as Icon, AntDesign } from "@expo/vector-icons";
-import { Container, ButtonPrimary, Text, Form } from "./styles";
+import { Container, ButtonPrimary, Text, Form, Github } from "./styles";
 import Input from "../../components/Input";
 import getValidationErrors from "../../utils/getValidationErrors";
-import axios from "axios";
 import * as Yup from "yup";
+import { useUser } from "../../hooks/ContextApi";
 
-export default function Login() {
+export default function Login({ navigation }) {
+  const { signIn, isSigned, setIsSigned } = useUser();
   const formRef = useRef(null);
   async function handleSubmit(data) {
     try {
@@ -18,27 +19,27 @@ export default function Login() {
       await schema.validate(data, {
         abortEarly: false,
       });
-
-      const response = await axios.get(
-        `https://api.github.com/users/${data.name}`
-      );
-      console.log(response.data);
-      const { name = login, avatar_url, bio } = response.data;
-
+      signIn({ name: data.name });
+      if (isSigned) {
+        navigation.navigate("Dashboard");
+      }
       formRef.current.setErrors({});
-      //   reset();
+      reset();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
-        // console.log(errors);
+        setIsSigned(false);
         formRef.current?.setErrors(errors);
       }
     }
   }
   return (
-    <Container>
-      <AntDesign name="github" size={120} color="#FFCE00" />
+    <Container
+      style={{ flex: 1, width: Dimensions.get("screen").width }}
+      behavior={Platform.OS === "android" ? "height" : "padding"}
+    >
       <Form ref={formRef} onSubmit={handleSubmit}>
+        <Github name="github" size={120} color="#FFCE00" />
         <Input name="name" placeholder="Usuário" />
         <ButtonPrimary onPress={() => formRef.current.submitForm()}>
           <Text>ENTRAR</Text>

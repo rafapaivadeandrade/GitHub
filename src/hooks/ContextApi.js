@@ -1,12 +1,37 @@
 import React, { createContext, useCallback, useState, useContext } from "react";
+import axios from "axios";
 
 const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-  return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
+  const [user, setUser] = useState([]);
+  const [isSigned, setIsSigned] = useState(false);
+  async function signIn({ name }) {
+    try {
+      const response = await axios.get(`https://api.github.com/users/${name}`);
+      setUser(response.data);
+      setIsSigned(true);
+    } catch (err) {
+      console.log(err);
+      setIsSigned(false);
+    }
+  }
+
+  return (
+    <UserContext.Provider
+      value={{
+        signIn,
+        isSigned: isSigned,
+        setIsSigned,
+        user: user,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };
 
-export function useProduct() {
+export function useUser() {
   const context = useContext(UserContext);
 
   if (!context) {

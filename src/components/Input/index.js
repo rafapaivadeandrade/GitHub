@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, View } from "react-native";
 import { useField } from "@unform/core";
-
+import { Error, Container, TextError } from "./styles";
 function Input({ name, ...rest }) {
   const inputRef = useRef(null);
 
-  const { fieldName, registerField, defaultValue, error } = useField(name);
-  console.log(error);
+  const {
+    fieldName,
+    registerField,
+    defaultValue = "rafapaivadeandrade",
+    error,
+  } = useField(name);
   useEffect(() => {
     inputRef.current.value = defaultValue;
   }, [defaultValue]);
@@ -32,28 +36,36 @@ function Input({ name, ...rest }) {
   }, [fieldName, registerField]);
 
   return (
-    <TextInput
-      ref={inputRef}
-      keyboardAppearance="light"
-      defaultValue={defaultValue}
-      placeholderTextColor="#666360"
-      style={styles.input}
-      onChangeText={(value) => {
-        if (inputRef.current) {
-          inputRef.current.value = value;
-        }
-      }}
-      {...rest}
-    />
+    <Container>
+      <TextInput
+        autoCorrect={false}
+        autoComplete={false}
+        ref={inputRef}
+        keyboardAppearance="light"
+        defaultValue={defaultValue}
+        placeholderTextColor="#767676"
+        style={styles.input}
+        onChangeText={(value) => {
+          if (inputRef.current) {
+            inputRef.current.value = value;
+          }
+        }}
+        {...rest}
+      />
+      {error && (
+        <Error>
+          <TextError styles={{ color: "red" }}>{error}</TextError>
+        </Error>
+      )}
+    </Container>
   );
 }
 const styles = StyleSheet.create({
   input: {
-    height: 60,
+    height: 50,
     backgroundColor: "#FFF",
     borderRadius: 10,
-    marginTop: 40,
-    width: 350,
+    maxWidth: 200,
     paddingHorizontal: 20,
     fontSize: 16,
   },

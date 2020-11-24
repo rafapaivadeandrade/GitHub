@@ -2,7 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./pages/Login";
-
+import Dashboard from "./pages/Dashboard";
+import Header from "../src/components/Header";
 const { Navigator, Screen } = createStackNavigator();
 
 export default function Routes() {
@@ -18,30 +19,14 @@ export default function Routes() {
           component={Login}
           options={{ headerShown: false }}
         />
-        {/* <Screen
-          name="OrphanageDetails"
-          component={OrphanageDetails}
+        <Screen
+          name="Dashboard"
+          component={Dashboard}
           options={{
             headerShown: true,
-            header: () => <Header showCancel={false} title="Orphanage" />,
+            header: () => <Header showCancel={false} />,
           }}
-        /> */}
-        {/* <Screen
-          name="SelectMapPosition"
-          component={SelectMapPosition}
-          options={{
-            headerShown: true,
-            header: () => <Header title="Select on map" />,
-          }}
-        /> */}
-        {/* <Screen
-          name="OrphanageData"
-          component={OrphanageData}
-          options={{
-            headerShown: true,
-            header: () => <Header title="Infrom the data" />,
-          }}
-        /> */}
+        />
       </Navigator>
     </NavigationContainer>
   );
