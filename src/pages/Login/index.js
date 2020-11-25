@@ -21,7 +21,7 @@ export default function Login({ navigation }) {
       });
       signIn({ name: data.name });
       if (isSigned) {
-        navigation.navigate("Dashboard");
+        navigation.navigate("ProfileTabs");
       }
       formRef.current.setErrors({});
       reset();

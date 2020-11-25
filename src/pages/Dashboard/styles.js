@@ -2,13 +2,11 @@ import styled from "styled-components/native";
 import { Feather as Icon, AntDesign } from "@expo/vector-icons";
 import { Form as Unform } from "@unform/mobile";
 import { RectButton } from "react-native-gesture-handler";
-export const Container = styled.KeyboardAvoidingView`
+export const Container = styled.View`
   flex: 1;
+  height: 100%;
   background-color: #292929;
-  align-items: center;
   border-color: #292929;
-
-  /* justify-content: center; */
 `;
 export const ButtonPrimary = styled(RectButton)`
   margin-top: 20px;
