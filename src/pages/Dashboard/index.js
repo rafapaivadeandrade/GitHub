@@ -26,14 +26,12 @@ export default function Dashboard({ navigation }) {
           justifyContent: "space-between",
         }}
       >
-        <TouchableOpacity style={styles.imageContainer}>
-          <Image
-            source={{
-              uri: `https://avatars0.githubusercontent.com/u/51189721?v=4`,
-            }}
-            style={styles.imageSelected}
-          />
-        </TouchableOpacity>
+        <Image
+          source={{
+            uri: `https://avatars0.githubusercontent.com/u/51189721?v=4`,
+          }}
+          style={styles.imageSelected}
+        />
         <View style={styles.firstView}>
           <View>
             <View style={styles.yelloView1}></View>
@@ -140,6 +138,5 @@ const styles = StyleSheet.create({
   number: {
     color: "#ffffff",
     fontSize: 40,
-    // marginLeft: 40,
   },
 });

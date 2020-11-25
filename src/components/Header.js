@@ -5,18 +5,21 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 export default function Header(props) {
   const navigation = useNavigation();
-
   return (
     <View style={styles.superContainer}>
       <View style={styles.container}>
         <Text style={styles.hashtag}>#rafa_klose</Text>
         <View style={styles.sairContainer}>
-          <Text style={styles.sair}>Sair</Text>
+          {props.greenArrowColor ? (
+            <Text style={styles.sair}> Salvar</Text>
+          ) : (
+            <Text style={styles.sair}>Sair</Text>
+          )}
           <BorderlessButton onPress={navigation.goBack}>
             <Feather
               name="arrow-right"
               size={24}
-              color="#c53030"
+              color={props.greenArrowColor ? props.greenArrowColor : "#c53030"}
               style={{ marginLeft: 10 }}
             />
           </BorderlessButton>
@@ -42,7 +45,6 @@ const styles = StyleSheet.create({
     paddingRight: 24,
     paddingTop: 15,
     backgroundColor: "#1f1f1f",
-    borderBottomWidth: 1,
     borderColor: "#dde3d0",
     borderBottomWidth: 0,
     flexDirection: "row",

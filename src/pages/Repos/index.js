@@ -5,7 +5,7 @@ import { Feather as Icon, AntDesign } from "@expo/vector-icons";
 import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
-export default function Dashboard({ navigation }) {
+export default function Repos({ navigation }) {
   const { signIn, isSigned, setIsSigned } = useUser();
 
   return (
@@ -62,7 +62,7 @@ export default function Dashboard({ navigation }) {
 const styles = StyleSheet.create({
   bottomLine: {
     borderBottomColor: "#BCBCBC",
-    borderWidth: 1,
+    borderWidth: 0.5,
   },
   firstView: {
     flexDirection: "row",
