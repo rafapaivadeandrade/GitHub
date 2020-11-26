@@ -1,7 +1,20 @@
 import React from "react";
-import { Dimensions, View, StyleSheet, Image } from "react-native";
+import { Dimensions, View, StyleSheet } from "react-native";
 import Header from "../../components/Header";
-import { Container, Text } from "./styles";
+import {
+  Container,
+  Text,
+  Image,
+  FirstView,
+  YellowView1,
+  YellowView2,
+  SecondView,
+  ThirdView,
+  MainText,
+  SecondaryText,
+  StatisticsView,
+  Number,
+} from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
 export default function Dashboard() {
@@ -11,122 +24,50 @@ export default function Dashboard() {
   return (
     <>
       <Header style={{ zIndex: 10 }} hashtag={emailSplitted} />
-      <Container
-        style={{
-          flex: 1,
-          width: Dimensions.get("screen").width,
-          justifyContent: "space-between",
-        }}
-      >
+      <Container>
         <Image
           source={{
             uri: user.avatar_url,
           }}
-          style={styles.imageSelected}
         />
-        <View style={styles.firstView}>
+        <FirstView>
           <View>
-            <View style={styles.yelloView1}></View>
-            <View style={styles.yelloView2}></View>
+            <YellowView1></YellowView1>
+            <YellowView2></YellowView2>
           </View>
 
-          <View styles={styles.personalInfoView}>
-            <Text style={styles.principal}>{user.name}</Text>
-            <Text style={styles.subPrincipal}>{user.blog}</Text>
-            <Text style={styles.subPrincipal}>{user.location}</Text>
-          </View>
-        </View>
-        <View style={styles.secondView}>
-          <View style={styles.statisticsView}>
-            <Text style={styles.number}>{user.followers}</Text>
-            <Text style={styles.subPrincipal}>Seguidores</Text>
-          </View>
-          <View style={styles.statisticsView}>
-            <Text style={styles.number}>{user.following}</Text>
-            <Text style={styles.subPrincipal}>Seguindo</Text>
-          </View>
-          <View style={styles.statisticsView}>
-            <Text style={styles.number}>{user.public_repos}</Text>
-            <Text style={styles.subPrincipal}>Repos</Text>
-          </View>
-        </View>
-        <View style={styles.thirdView}>
           <View>
-            <View style={styles.yelloView1}></View>
-            <View style={styles.yelloView2}></View>
+            <MainText>{user.name}</MainText>
+            <SecondaryText>{user.blog}</SecondaryText>
+            <SecondaryText>{user.location}</SecondaryText>
+          </View>
+        </FirstView>
+        <SecondView>
+          <StatisticsView>
+            <Number>{user.followers}</Number>
+            <SecondaryText>Seguidores</SecondaryText>
+          </StatisticsView>
+          <StatisticsView>
+            <Number>{user.following}</Number>
+            <SecondaryText>Seguindo</SecondaryText>
+          </StatisticsView>
+          <StatisticsView>
+            <Number>{user.public_repos}</Number>
+            <SecondaryText>Repos</SecondaryText>
+          </StatisticsView>
+        </SecondView>
+        <ThirdView>
+          <View>
+            <YellowView1></YellowView1>
+            <YellowView2></YellowView2>
           </View>
 
-          <View style={styles.personalInfBoView}>
-            <Text style={styles.principal}>Bio</Text>
-            <Text style={styles.subPrincipal}>{user.bio}</Text>
+          <View>
+            <MainText>Bio</MainText>
+            <SecondaryText>{user.bio}</SecondaryText>
           </View>
-        </View>
+        </ThirdView>
       </Container>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  imageSelected: {
-    borderColor: "#ddd",
-    borderWidth: 3,
-    width: 120,
-    height: 120,
-    borderRadius: 120 / 2,
-    marginTop: -60,
-    alignItems: "center",
-    alignSelf: "center",
-  },
-  firstView: {
-    flexDirection: "row",
-    marginTop: -40,
-  },
-  yelloView1: {
-    width: 10,
-    height: 20,
-    backgroundColor: "#FFCE00",
-    marginRight: 20,
-    borderTopRightRadius: 20 / 2,
-  },
-  yelloView2: {
-    width: 10,
-    height: 20,
-    backgroundColor: "#FFCE00",
-    marginRight: 20,
-    borderBottomRightRadius: 20 / 2,
-  },
-  personalInfoView: {
-    flexDirection: "column",
-  },
-  secondView: {
-    backgroundColor: "#383838",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingHorizontal: 10,
-    // marginTop: -40,
-  },
-  thirdView: {
-    marginBottom: 100,
-    flexDirection: "row",
-    marginBottom: 150,
-  },
-  principal: {
-    color: "#ffffff",
-    fontSize: 25,
-  },
-  subPrincipal: {
-    fontSize: 16,
-    fontWeight: "200",
-    color: "#BCBCBC",
-  },
-  statisticsView: {
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  number: {
-    color: "#ffffff",
-    fontSize: 40,
-  },
-});
