@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import {
   Dimensions,
   View,
@@ -12,10 +12,15 @@ import { useUser } from "../../hooks/ContextApi";
 
 export default function Seguidor() {
   const { temporaryUser } = useUser();
+  const emailSplitted = temporaryUser.blog.split("@");
 
   return (
     <>
-      <HeaderFollower style={{ zIndex: 10 }} greenArrowColor={"#539421"} />
+      <HeaderFollower
+        style={{ zIndex: 10 }}
+        greenArrowColor={"#539421"}
+        emailSplitted={emailSplitted[0]}
+      />
       <Container
         style={{
           flex: 1,

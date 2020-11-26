@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
@@ -7,7 +7,12 @@ import { useUser } from "../hooks/ContextApi";
 export default function HeaderFollower(props) {
   const navigation = useNavigation();
   const { signIn, isSigned, temporaryUser } = useUser();
-  const emailSplitted = temporaryUser.blog.split("@");
+  const [email, setEmail] = useState([""]);
+
+  // useEffect(() => {
+  //   let emailSplitted = temporaryUser.blog.split("@");
+  //   setEmail(emailSplitted[0]);
+  // }, [temporaryUser]);
 
   function signInSelectedUser() {
     signIn({ name: temporaryUser.login });
@@ -29,7 +34,7 @@ export default function HeaderFollower(props) {
             />
           </BorderlessButton>
         )}
-        <Text style={styles.hashtag}>#{emailSplitted[0]}</Text>
+        <Text style={styles.hashtag}>#{props.emailSplitted}</Text>
         <View style={styles.sairContainer}>
           {props.greenArrowColor ? (
             <Text style={styles.sair}> Salvar</Text>

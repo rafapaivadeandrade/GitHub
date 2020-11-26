@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
-import { KeyboardAvoidingView, Platform, Dimensions } from "react-native";
-import { Feather as Icon, AntDesign } from "@expo/vector-icons";
+import React, { useRef } from "react";
+import { Platform, Dimensions } from "react-native";
+import { Feather as Icon } from "@expo/vector-icons";
 import { Container, ButtonPrimary, Text, Form, Github } from "./styles";
 import Input from "../../components/Input";
 import getValidationErrors from "../../utils/getValidationErrors";

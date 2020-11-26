@@ -38,7 +38,6 @@ export default function Seguidores({ navigation }) {
       <Container
         style={{
           flex: 1,
-          width: Dimensions.get("screen").width,
         }}
         data={followers}
         keyExtractor={(follower) => String(follower.id)}

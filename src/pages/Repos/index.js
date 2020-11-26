@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import HeaderRepo from "../../components/HeaderRepo";
 import { Feather as Icon } from "@expo/vector-icons";
 import {
