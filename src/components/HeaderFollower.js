@@ -7,12 +7,6 @@ import { useUser } from "../hooks/ContextApi";
 export default function HeaderFollower(props) {
   const navigation = useNavigation();
   const { signIn, isSigned, temporaryUser } = useUser();
-  const [email, setEmail] = useState([""]);
-
-  // useEffect(() => {
-  //   let emailSplitted = temporaryUser.blog.split("@");
-  //   setEmail(emailSplitted[0]);
-  // }, [temporaryUser]);
 
   function signInSelectedUser() {
     signIn({ name: temporaryUser.login });
