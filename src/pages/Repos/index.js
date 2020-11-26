@@ -1,60 +1,64 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Dimensions, View, StyleSheet, ScrollView } from "react-native";
+import { FlatList, View, StyleSheet, ScrollView } from "react-native";
 import HeaderRepo from "../../components/HeaderRepo";
 import { Feather as Icon, AntDesign } from "@expo/vector-icons";
 import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
 export default function Repos({ navigation }) {
-  const { signIn, isSigned, setIsSigned } = useUser();
+  const { repositorios, user } = useUser();
 
   return (
     <>
-      <HeaderRepo style={{ zIndex: 10 }} />
-
+      <HeaderRepo
+        style={{ zIndex: 10 }}
+        repositoriosQuantidade={user.public_repos}
+      />
       <Container
-        style={{
-          flex: 1,
-          width: Dimensions.get("screen").width,
-        }}
-      >
-        <View style={styles.bottomLine}>
-          <View style={styles.firstView}>
-            <View>
-              <View style={styles.yelloView1}></View>
-              <View style={styles.yelloView2}></View>
-            </View>
+        style={{ flex: 1 }}
+        data={repositorios}
+        keyExtractor={(repositorio) => String(repositorio.id)}
+        showsVerticalScrollIndicator={false}
+        onEndReachedThreshold={0.2}
+        renderItem={({ item: repositorio }) => (
+          <View style={styles.bottomLine}>
+            <View style={styles.firstView}>
+              <View>
+                <View style={styles.yelloView1}></View>
+                <View style={styles.yelloView2}></View>
+              </View>
 
-            <View styles={styles.personalInfoView}>
-              <Text style={styles.principal}>brasiliapp-react-native</Text>
-              <Text style={styles.subPrincipal}>
-                Repository for centralization of the BrasilApp mobile project
-              </Text>
-              <View style={styles.iconsView}>
-                <View style={{ flexDirection: "row" }}>
-                  <Icon
-                    name="star"
-                    size={24}
-                    color="#FFCE00"
-                    style={{ marginRight: 5 }}
-                  />
-                  <Text style={styles.number}>32</Text>
-                </View>
+              <View styles={styles.personalInfoView}>
+                <Text style={styles.principal}>{repositorio.name}</Text>
+                <Text style={styles.subPrincipal}>
+                  {repositorio.description}
+                </Text>
+                <View style={styles.iconsView}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Icon
+                      name="star"
+                      size={24}
+                      color="#FFCE00"
+                      style={{ marginRight: 5 }}
+                    />
+                    <Text style={styles.number}>{user.followers}</Text>
+                  </View>
 
-                <View style={{ flexDirection: "row" }}>
-                  <Icon
-                    name="lock"
-                    size={24}
-                    color="#539421"
-                    style={{ marginRight: 5 }}
-                  />
-                  <Icon name="unlock" size={24} color="#A80C29" />
+                  <View style={{ flexDirection: "row" }}>
+                    <Icon
+                      name="lock"
+                      size={24}
+                      color="#539421"
+                      style={{ marginRight: 5 }}
+                    />
+                    <Icon name="unlock" size={24} color="#A80C29" />
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-      </Container>
+        )}
+      />
     </>
   );
 }
@@ -106,5 +110,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: "row",
     justifyContent: "space-between",
+    width: 350,
   },
 });

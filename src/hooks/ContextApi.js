@@ -5,11 +5,22 @@ const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState([]);
+  const [repositorios, setRepositorios] = useState([]);
   const [isSigned, setIsSigned] = useState(false);
   async function signIn({ name }) {
     try {
       const response = await axios.get(`https://api.github.com/users/${name}`);
       setUser(response.data);
+      setIsSigned(true);
+    } catch (err) {
+      console.log(err);
+      setIsSigned(false);
+    }
+    try {
+      const response = await axios.get(
+        `https://api.github.com/users/${name}/repos`
+      );
+      setRepositorios(response.data);
       setIsSigned(true);
     } catch (err) {
       console.log(err);
@@ -24,6 +35,7 @@ export const UserProvider = ({ children }) => {
         isSigned: isSigned,
         setIsSigned,
         user: user,
+        repositorios: repositorios,
       }}
     >
       {children}

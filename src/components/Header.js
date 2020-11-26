@@ -8,7 +8,9 @@ export default function Header(props) {
   return (
     <View style={styles.superContainer}>
       <View style={styles.container}>
-        <Text style={styles.hashtag}>#rafa_klose</Text>
+        <Text style={styles.hashtag}>
+          #{props.hashtag ? props.hashtag[0] : ""}
+        </Text>
         <View style={styles.sairContainer}>
           {props.greenArrowColor ? (
             <Text style={styles.sair}> Salvar</Text>
@@ -25,14 +27,6 @@ export default function Header(props) {
           </BorderlessButton>
         </View>
       </View>
-      {/* <TouchableOpacity style={styles.imageContainer}>
-        <Image
-          source={{
-            uri: `https://avatars0.githubusercontent.com/u/51189721?v=4`,
-          }}
-          style={styles.imageSelected}
-        />
-      </TouchableOpacity> */}
     </View>
   );
 }

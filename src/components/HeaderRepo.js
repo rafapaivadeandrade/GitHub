@@ -12,7 +12,11 @@ export default function HeaderRepo(props) {
         <BorderlessButton onPress={navigation.goBack}>
           <Feather name="arrow-left" size={24} color="#E5E5E5" />
         </BorderlessButton>
-        <Text style={styles.repositorios}>10 Repositorios</Text>
+        <Text style={styles.repositorios}>
+          {props.repositoriosQuantidade
+            ? `${props.repositoriosQuantidade} Repositorios`
+            : `${props.repositoriosSeguidores} Seguidores`}
+        </Text>
         <View style={styles.invisibleContainer}></View>
       </View>
     </View>

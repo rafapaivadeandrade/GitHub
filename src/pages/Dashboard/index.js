@@ -9,16 +9,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Header from "../../components/Header";
-import { Feather as Icon, AntDesign } from "@expo/vector-icons";
-import { Container, ButtonPrimary, Text, Form, Github } from "./styles";
+import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
 export default function Dashboard({ navigation }) {
-  const { signIn, isSigned, setIsSigned } = useUser();
+  const { user } = useUser();
+  const emailSplitted = user.blog.split("@");
 
   return (
     <>
-      <Header style={{ zIndex: 10 }} />
+      <Header style={{ zIndex: 10 }} hashtag={emailSplitted} />
       <Container
         style={{
           flex: 1,
@@ -39,22 +39,22 @@ export default function Dashboard({ navigation }) {
           </View>
 
           <View styles={styles.personalInfoView}>
-            <Text style={styles.principal}>Rafael Paiva De Andrade</Text>
-            <Text style={styles.subPrincipal}>rafa_klose@hotmail.com</Text>
-            <Text style={styles.subPrincipal}>Itai/PE</Text>
+            <Text style={styles.principal}>{user.name}</Text>
+            <Text style={styles.subPrincipal}>{user.blog}</Text>
+            <Text style={styles.subPrincipal}>{user.location}</Text>
           </View>
         </View>
         <View style={styles.secondView}>
           <View style={styles.statisticsView}>
-            <Text style={styles.number}>20</Text>
+            <Text style={styles.number}>{user.followers}</Text>
             <Text style={styles.subPrincipal}>Seguidores</Text>
           </View>
           <View style={styles.statisticsView}>
-            <Text style={styles.number}>20</Text>
+            <Text style={styles.number}>{user.following}</Text>
             <Text style={styles.subPrincipal}>Seguindo</Text>
           </View>
           <View style={styles.statisticsView}>
-            <Text style={styles.number}>10</Text>
+            <Text style={styles.number}>{user.public_repos}</Text>
             <Text style={styles.subPrincipal}>Repos</Text>
           </View>
         </View>
@@ -66,12 +66,7 @@ export default function Dashboard({ navigation }) {
 
           <View style={styles.personalInfBoView}>
             <Text style={styles.principal}>Bio</Text>
-            <Text style={styles.subPrincipal}>
-              Web DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb Developer
-            </Text>
+            <Text style={styles.subPrincipal}>{user.bio}</Text>
           </View>
         </View>
       </Container>
