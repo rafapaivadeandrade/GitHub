@@ -14,7 +14,7 @@ export default function HeaderFollowers(props) {
         </BorderlessButton>
         <Text style={styles.repositorios}>
           {props.repositoriosSeguidores
-            ? `${props.repositoriosSeguidores} Seguidore(s)`
+            ? `${props.repositoriosSeguidores} Seguidor(es)`
             : `0 Seguidore(s)`}
         </Text>
         <View style={styles.invisibleContainer}></View>

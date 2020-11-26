@@ -1,13 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-
-import { Ionicons, Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import Dashboard from "../pages/Dashboard";
 import Repos from "../pages/Repos";
 import Seguidores from "../pages/Seguidores";
 import Seguindo from "../pages/Seguindo";
-import Header from "../components/Header";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 

@@ -1,18 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Dimensions,
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { Dimensions, View, StyleSheet, Image } from "react-native";
 import Header from "../../components/Header";
 import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard() {
   const { user } = useUser();
   const emailSplitted = user.blog.split("@");
 
@@ -87,6 +79,7 @@ const styles = StyleSheet.create({
   },
   firstView: {
     flexDirection: "row",
+    marginTop: -40,
   },
   yelloView1: {
     width: 10,
@@ -112,10 +105,12 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingHorizontal: 10,
+    // marginTop: -40,
   },
   thirdView: {
     marginBottom: 100,
     flexDirection: "row",
+    marginBottom: 150,
   },
   principal: {
     color: "#ffffff",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import {
   Dimensions,
   View,
@@ -11,7 +11,6 @@ import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
-import { useNavigation } from "@react-navigation/native";
 
 export default function Seguidores({ navigation }) {
   const { followers, user, selectedUser } = useUser();

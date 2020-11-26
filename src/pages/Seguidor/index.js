@@ -6,27 +6,16 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import Header from "../../components/Header";
-import { Container, ButtonPrimary, Text, Form, Github } from "./styles";
+import HeaderFollower from "../../components/HeaderFollower";
+import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
-export default function Seguidor({ navigation }) {
+export default function Seguidor() {
   const { temporaryUser } = useUser();
-  const [userEmailSplitted, setUserEmailSplitted] = useState("");
-  useEffect(() => {
-    function splitUser() {
-      const emailSplitted = temporaryUser.blog.split("@");
-      setUserEmailSplitted(emailSplitted);
-    }
-    splitUser();
-  }, [temporaryUser]);
+
   return (
     <>
-      <Header
-        style={{ zIndex: 10 }}
-        greenArrowColor={"#539421"}
-        hashtag={userEmailSplitted}
-      />
+      <HeaderFollower style={{ zIndex: 10 }} greenArrowColor={"#539421"} />
       <Container
         style={{
           flex: 1,
@@ -34,7 +23,7 @@ export default function Seguidor({ navigation }) {
           justifyContent: "space-between",
         }}
       >
-        <TouchableOpacity style={styles.imageContainer}>
+        <TouchableOpacity>
           <Image
             source={{
               uri: temporaryUser.avatar_url,
@@ -97,6 +86,7 @@ const styles = StyleSheet.create({
   },
   firstView: {
     flexDirection: "row",
+    marginTop: -40,
   },
   yelloView1: {
     width: 10,
@@ -122,10 +112,11 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingHorizontal: 10,
+    // marginTop: -10,
   },
   thirdView: {
-    marginBottom: 100,
     flexDirection: "row",
+    marginBottom: 150,
   },
   principal: {
     color: "#ffffff",
@@ -143,6 +134,5 @@ const styles = StyleSheet.create({
   number: {
     color: "#ffffff",
     fontSize: 40,
-    // marginLeft: 40,
   },
 });

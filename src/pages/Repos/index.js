@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import { FlatList, View, StyleSheet, ScrollView } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import HeaderRepo from "../../components/HeaderRepo";
 import { Feather as Icon, AntDesign } from "@expo/vector-icons";
 import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
-export default function Repos({ navigation }) {
+export default function Repos() {
   const { repositorios, user } = useUser();
 
   return (

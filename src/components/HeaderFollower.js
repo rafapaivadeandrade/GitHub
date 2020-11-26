@@ -4,13 +4,10 @@ import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useUser } from "../hooks/ContextApi";
-export default function Header(props) {
+export default function HeaderFollower(props) {
   const navigation = useNavigation();
   const { signIn, isSigned, temporaryUser } = useUser();
-
-  function goBackToLogin() {
-    navigation.navigate("Login");
-  }
+  const emailSplitted = temporaryUser.blog.split("@");
 
   function signInSelectedUser() {
     signIn({ name: temporaryUser.login });
@@ -23,7 +20,7 @@ export default function Header(props) {
     <View style={styles.superContainer}>
       <View style={styles.container}>
         {props.greenArrowColor && (
-          <BorderlessButton onPress={goBackToLogin}>
+          <BorderlessButton onPress={navigation.goBack}>
             <Feather
               name="arrow-left"
               size={24}
@@ -32,9 +29,7 @@ export default function Header(props) {
             />
           </BorderlessButton>
         )}
-        <Text style={styles.hashtag}>
-          #{props.hashtag ? props.hashtag[0] : ""}
-        </Text>
+        <Text style={styles.hashtag}>#{emailSplitted[0]}</Text>
         <View style={styles.sairContainer}>
           {props.greenArrowColor ? (
             <Text style={styles.sair}> Salvar</Text>

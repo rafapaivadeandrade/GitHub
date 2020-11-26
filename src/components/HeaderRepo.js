@@ -15,7 +15,7 @@ export default function HeaderRepo(props) {
         <Text style={styles.repositorios}>
           {props.repositoriosQuantidade
             ? `${props.repositoriosQuantidade} Repositorios`
-            : `0 Seguidores`}
+            : `0 Repositorios`}
         </Text>
         <View style={styles.invisibleContainer}></View>
       </View>
