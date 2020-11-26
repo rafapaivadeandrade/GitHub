@@ -1,17 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  Dimensions,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import React from "react";
+import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import HeaderFollowing from "../../components/HeaderFollowing";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
-import { useNavigation } from "@react-navigation/native";
 
 export default function Seguidores({ navigation }) {
   const { user, following, selectedUser } = useUser();
@@ -62,10 +55,7 @@ export default function Seguidores({ navigation }) {
                   }}
                 >
                   <Text style={styles.text}>#{follow.login}</Text>
-                  <BorderlessButton
-                    onPress={navigation.goBack}
-                    style={styles.button}
-                  >
+                  <BorderlessButton style={styles.button}>
                     <Feather name="arrow-right" size={24} color="#E5E5E5" />
                   </BorderlessButton>
                 </View>
