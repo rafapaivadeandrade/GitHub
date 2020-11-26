@@ -3,11 +3,22 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useUser } from "../hooks/ContextApi";
 export default function Header(props) {
   const navigation = useNavigation();
+  const { signIn, isSigned, temporaryUser } = useUser();
 
   function goBackToLogin() {
     navigation.navigate("Login");
+  }
+
+  function signInSelectedUser() {
+    signIn({ name: temporaryUser.login });
+    // navigation.navigate("Dashboard");
+
+    if (isSigned) {
+      navigation.navigate("Dashboard");
+    }
   }
 
   return (
@@ -22,7 +33,9 @@ export default function Header(props) {
           ) : (
             <Text style={styles.sair}>Sair</Text>
           )}
-          <BorderlessButton onPress={goBackToLogin}>
+          <BorderlessButton
+            onPress={props.greenArrowColor ? signInSelectedUser : goBackToLogin}
+          >
             <Feather
               name="arrow-right"
               size={24}

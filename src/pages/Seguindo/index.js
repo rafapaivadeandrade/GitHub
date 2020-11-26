@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import HeaderFollowers from "../../components/HeaderFollowers";
+import HeaderFollowing from "../../components/HeaderFollowing";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { Container, Text } from "./styles";
@@ -14,11 +14,22 @@ import { useUser } from "../../hooks/ContextApi";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Seguidores({ navigation }) {
-  const { user, following } = useUser();
+  const { user, following, selectedUser } = useUser();
+
+  function handleNewUserPage(login) {
+    selectedUser({
+      name: login,
+    });
+    if (selectedUser) {
+      navigation.navigate("TemporaryUser");
+    } else {
+      alert("An error has occurred while selecting a new user.");
+    }
+  }
 
   return (
     <>
-      <HeaderFollowers
+      <HeaderFollowing
         style={{ zIndex: 10 }}
         repositoriosSeguindo={user.following}
       />
@@ -30,35 +41,37 @@ export default function Seguidores({ navigation }) {
         showsVerticalScrollIndicator={false}
         onEndReachedThreshold={0.2}
         renderItem={({ item: follow }) => (
-          <View style={styles.bottomLine}>
-            <View style={styles.firstView}>
-              <View>
-                <View style={styles.yelloView1}></View>
-                <View style={styles.yelloView2}></View>
-              </View>
-              <Image
-                source={{
-                  uri: follow.avatar_url,
-                }}
-                style={styles.imageSelected}
-              />
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: 250,
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={styles.text}>#{follow.login}</Text>
-                <BorderlessButton
-                  onPress={navigation.goBack}
-                  style={styles.button}
+          <TouchableOpacity onPress={() => handleNewUserPage(follow.login)}>
+            <View style={styles.bottomLine}>
+              <View style={styles.firstView}>
+                <View>
+                  <View style={styles.yelloView1}></View>
+                  <View style={styles.yelloView2}></View>
+                </View>
+                <Image
+                  source={{
+                    uri: follow.avatar_url,
+                  }}
+                  style={styles.imageSelected}
+                />
+                <View
+                  style={{
+                    flexDirection: "row",
+                    width: 250,
+                    justifyContent: "space-between",
+                  }}
                 >
-                  <Feather name="arrow-right" size={24} color="#E5E5E5" />
-                </BorderlessButton>
+                  <Text style={styles.text}>#{follow.login}</Text>
+                  <BorderlessButton
+                    onPress={navigation.goBack}
+                    style={styles.button}
+                  >
+                    <Feather name="arrow-right" size={24} color="#E5E5E5" />
+                  </BorderlessButton>
+                </View>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </>

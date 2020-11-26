@@ -28,7 +28,7 @@ export default function Dashboard({ navigation }) {
       >
         <Image
           source={{
-            uri: `https://avatars0.githubusercontent.com/u/51189721?v=4`,
+            uri: user.avatar_url,
           }}
           style={styles.imageSelected}
         />

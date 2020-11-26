@@ -33,16 +33,17 @@ export default function Seguidores({ navigation }) {
         style={{ zIndex: 10 }}
         repositoriosSeguidores={user.followers}
       />
-
-      {followers.map((follower) => (
-        <Container
-          key={follower.id}
-          style={{
-            flex: 1,
-            width: Dimensions.get("screen").width,
-          }}
-        >
-          <TouchableOpacity onPress={handleNewUserPage(follower.login)}>
+      <Container
+        style={{
+          flex: 1,
+          width: Dimensions.get("screen").width,
+        }}
+        data={followers}
+        keyExtractor={(follower) => String(follower.id)}
+        showsVerticalScrollIndicator={false}
+        onEndReachedThreshold={0.2}
+        renderItem={({ item: follower }) => (
+          <TouchableOpacity onPress={() => handleNewUserPage(follower.login)}>
             <View style={styles.bottomLine}>
               <View style={styles.firstView}>
                 <View>
@@ -73,8 +74,8 @@ export default function Seguidores({ navigation }) {
               </View>
             </View>
           </TouchableOpacity>
-        </Container>
-      ))}
+        )}
+      />
     </>
   );
 }

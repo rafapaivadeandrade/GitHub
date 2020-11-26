@@ -15,7 +15,7 @@ export default function HeaderFollowers(props) {
         <Text style={styles.repositorios}>
           {props.repositoriosSeguidores
             ? `${props.repositoriosSeguidores} Seguidore(s)`
-            : `${props.repositoriosSeguindo} Seguindo`}
+            : `0 Seguidore(s)`}
         </Text>
         <View style={styles.invisibleContainer}></View>
       </View>

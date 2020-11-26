@@ -11,10 +11,22 @@ import { Container, ButtonPrimary, Text, Form, Github } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
 export default function Seguidor({ navigation }) {
-  const { signIn, isSigned, setIsSigned } = useUser();
+  const { temporaryUser } = useUser();
+  const [userEmailSplitted, setUserEmailSplitted] = useState("");
+  useEffect(() => {
+    function splitUser() {
+      const emailSplitted = temporaryUser.blog.split("@");
+      setUserEmailSplitted(emailSplitted);
+    }
+    splitUser();
+  }, [temporaryUser]);
   return (
     <>
-      <Header style={{ zIndex: 10 }} greenArrowColor={"#539421"} />
+      <Header
+        style={{ zIndex: 10 }}
+        greenArrowColor={"#539421"}
+        hashtag={userEmailSplitted}
+      />
       <Container
         style={{
           flex: 1,
@@ -25,7 +37,7 @@ export default function Seguidor({ navigation }) {
         <TouchableOpacity style={styles.imageContainer}>
           <Image
             source={{
-              uri: `https://avatars0.githubusercontent.com/u/51189721?v=4`,
+              uri: temporaryUser.avatar_url,
             }}
             style={styles.imageSelected}
           />
@@ -37,22 +49,22 @@ export default function Seguidor({ navigation }) {
           </View>
 
           <View styles={styles.personalInfoView}>
-            <Text style={styles.principal}>Rafael Paiva De Andrade</Text>
-            <Text style={styles.subPrincipal}>rafa_klose@hotmail.com</Text>
-            <Text style={styles.subPrincipal}>Itai/PE</Text>
+            <Text style={styles.principal}>{temporaryUser.name}</Text>
+            <Text style={styles.subPrincipal}>{temporaryUser.blog}</Text>
+            <Text style={styles.subPrincipal}>{temporaryUser.location}</Text>
           </View>
         </View>
         <View style={styles.secondView}>
           <View style={styles.statisticsView}>
-            <Text style={styles.number}>20</Text>
+            <Text style={styles.number}>{temporaryUser.followers}</Text>
             <Text style={styles.subPrincipal}>Seguidores</Text>
           </View>
           <View style={styles.statisticsView}>
-            <Text style={styles.number}>20</Text>
+            <Text style={styles.number}>{temporaryUser.following}</Text>
             <Text style={styles.subPrincipal}>Seguindo</Text>
           </View>
           <View style={styles.statisticsView}>
-            <Text style={styles.number}>10</Text>
+            <Text style={styles.number}>{temporaryUser.public_repos}</Text>
             <Text style={styles.subPrincipal}>Repos</Text>
           </View>
         </View>
@@ -64,12 +76,7 @@ export default function Seguidor({ navigation }) {
 
           <View style={styles.personalInfBoView}>
             <Text style={styles.principal}>Bio</Text>
-            <Text style={styles.subPrincipal}>
-              Web DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb Developer
-            </Text>
+            <Text style={styles.subPrincipal}>{temporaryUser.bio}</Text>
           </View>
         </View>
       </Container>
