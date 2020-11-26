@@ -10,7 +10,7 @@ import Header from "../../components/Header";
 import { Container, ButtonPrimary, Text, Form, Github } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
 
-export default function Seguindo({ navigation }) {
+export default function Seguidor({ navigation }) {
   const { signIn, isSigned, setIsSigned } = useUser();
   return (
     <>

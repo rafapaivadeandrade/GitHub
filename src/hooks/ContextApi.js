@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
   const [followers, setFollowers] = useState([]);
   const [follower, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [temporaryUser, setTemporaryUser] = useState([]);
   const [isSigned, setIsSigned] = useState(false);
   async function signIn({ name }) {
     try {
@@ -53,6 +54,17 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  async function selectedUser({ name }) {
+    try {
+      const response = await axios.get(`https://api.github.com/users/${name}`);
+      setTemporaryUser(response.data);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -64,6 +76,8 @@ export const UserProvider = ({ children }) => {
         followers: followers,
         follower: follower,
         following: following,
+        selectedUser: selectedUser,
+        temporaryUser: temporaryUser,
       }}
     >
       {children}

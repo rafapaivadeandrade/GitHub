@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Header from "../components/Header";
 import ProfileTabs from "./ProfileTabs";
+import Seguidor from "../pages/Seguidor";
 const { Navigator, Screen } = createStackNavigator();
 
 export default function Routes() {
@@ -20,24 +21,16 @@ export default function Routes() {
           component={Login}
           options={{ headerShown: false }}
         />
-        {/* <Screen
-          name="ProfileTabs"
-          component={Dashboard}
-          options={{
-            headerShown: true,
-            header: () => <Header showCancel={false} />,
-            // headerRight: () => <Header showCancel={false} />,
-          }}
-        /> */}
+
+        <Screen name="ProfileTabs" component={ProfileTabs} />
         <Screen
-          name="ProfileTabs"
-          component={ProfileTabs}
-          options={
-            {
-              // headerShown: true,
-              // header: () => <Header showCancel={false} />,
-            }
-          }
+          name="TemporaryUser"
+          component={Seguidor}
+          // options={{
+          //   headerShown: true,
+          //   header: () => <Header saveUser={true} />,
+          //   // headerRight: () => <Header showCancel={false} />,
+          // }}
         />
       </Navigator>
     </NavigationContainer>

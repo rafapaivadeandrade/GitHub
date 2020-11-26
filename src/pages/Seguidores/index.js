@@ -14,7 +14,18 @@ import { useUser } from "../../hooks/ContextApi";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Seguidores({ navigation }) {
-  const { followers, user, follower } = useUser();
+  const { followers, user, selectedUser } = useUser();
+
+  function handleNewUserPage(login) {
+    selectedUser({
+      name: login,
+    });
+    if (selectedUser) {
+      navigation.navigate("TemporaryUser");
+    } else {
+      alert("An error has occurred while selecting a new user.");
+    }
+  }
 
   return (
     <>
@@ -22,6 +33,7 @@ export default function Seguidores({ navigation }) {
         style={{ zIndex: 10 }}
         repositoriosSeguidores={user.followers}
       />
+
       {followers.map((follower) => (
         <Container
           key={follower.id}
@@ -30,35 +42,37 @@ export default function Seguidores({ navigation }) {
             width: Dimensions.get("screen").width,
           }}
         >
-          <View style={styles.bottomLine}>
-            <View style={styles.firstView}>
-              <View>
-                <View style={styles.yelloView1}></View>
-                <View style={styles.yelloView2}></View>
-              </View>
-              <Image
-                source={{
-                  uri: follower.avatar_url,
-                }}
-                style={styles.imageSelected}
-              />
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: 250,
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={styles.text}>#{follower.login}</Text>
-                <BorderlessButton
-                  onPress={navigation.goBack}
-                  style={styles.button}
+          <TouchableOpacity onPress={handleNewUserPage(follower.login)}>
+            <View style={styles.bottomLine}>
+              <View style={styles.firstView}>
+                <View>
+                  <View style={styles.yelloView1}></View>
+                  <View style={styles.yelloView2}></View>
+                </View>
+                <Image
+                  source={{
+                    uri: follower.avatar_url,
+                  }}
+                  style={styles.imageSelected}
+                />
+                <View
+                  style={{
+                    flexDirection: "row",
+                    width: 250,
+                    justifyContent: "space-between",
+                  }}
                 >
-                  <Feather name="arrow-right" size={24} color="#E5E5E5" />
-                </BorderlessButton>
+                  <Text style={styles.text}>#{follower.login}</Text>
+                  <BorderlessButton
+                    onPress={navigation.goBack}
+                    style={styles.button}
+                  >
+                    <Feather name="arrow-right" size={24} color="#E5E5E5" />
+                  </BorderlessButton>
+                </View>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </Container>
       ))}
     </>
