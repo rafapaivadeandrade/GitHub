@@ -1,9 +1,8 @@
 import React from "react";
-import { Dimensions, View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import Header from "../../components/Header";
 import {
   Container,
-  Text,
   Image,
   FirstView,
   YellowView1,
