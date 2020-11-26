@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import HeaderFollowers from "../../components/HeaderFollowers";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
