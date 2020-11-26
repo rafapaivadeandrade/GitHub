@@ -5,6 +5,11 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 export default function Header(props) {
   const navigation = useNavigation();
+
+  function goBackToLogin() {
+    navigation.navigate("Login");
+  }
+
   return (
     <View style={styles.superContainer}>
       <View style={styles.container}>
@@ -17,7 +22,7 @@ export default function Header(props) {
           ) : (
             <Text style={styles.sair}>Sair</Text>
           )}
-          <BorderlessButton onPress={navigation.goBack}>
+          <BorderlessButton onPress={goBackToLogin}>
             <Feather
               name="arrow-right"
               size={24}

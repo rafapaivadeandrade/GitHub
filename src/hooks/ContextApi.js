@@ -6,6 +6,9 @@ const UserContext = createContext({});
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState([]);
   const [repositorios, setRepositorios] = useState([]);
+  const [followers, setFollowers] = useState([]);
+  const [follower, setFollower] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [isSigned, setIsSigned] = useState(false);
   async function signIn({ name }) {
     try {
@@ -21,10 +24,32 @@ export const UserProvider = ({ children }) => {
         `https://api.github.com/users/${name}/repos`
       );
       setRepositorios(response.data);
-      setIsSigned(true);
     } catch (err) {
       console.log(err);
-      setIsSigned(false);
+    }
+    try {
+      const response = await axios.get(
+        `https://api.github.com/users/${name}/followers`
+      );
+      setFollowers(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      const response = await axios.get(
+        `https://api.github.com/users/${followers.login}`
+      );
+      setFollower(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      const response = await axios.get(
+        `https://api.github.com/users/${name}/following`
+      );
+      setFollowing(response.data);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -36,6 +61,9 @@ export const UserProvider = ({ children }) => {
         setIsSigned,
         user: user,
         repositorios: repositorios,
+        followers: followers,
+        follower: follower,
+        following: following,
       }}
     >
       {children}

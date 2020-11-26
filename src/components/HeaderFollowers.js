@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-export default function HeaderRepo(props) {
+export default function HeaderFollowers(props) {
   const navigation = useNavigation();
 
   return (
@@ -12,7 +12,11 @@ export default function HeaderRepo(props) {
         <BorderlessButton onPress={navigation.goBack}>
           <Feather name="arrow-left" size={24} color="#E5E5E5" />
         </BorderlessButton>
-        <Text style={styles.repositorios}>10 Seguidores</Text>
+        <Text style={styles.repositorios}>
+          {props.repositoriosSeguidores
+            ? `${props.repositoriosSeguidores} Seguidore(s)`
+            : `${props.repositoriosSeguindo} Seguindo`}
+        </Text>
         <View style={styles.invisibleContainer}></View>
       </View>
     </View>

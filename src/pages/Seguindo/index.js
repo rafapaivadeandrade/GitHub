@@ -3,93 +3,81 @@ import {
   Dimensions,
   View,
   StyleSheet,
-  Image,
   TouchableOpacity,
+  Image,
 } from "react-native";
-import Header from "../../components/Header";
-import { Container, ButtonPrimary, Text, Form, Github } from "./styles";
+import HeaderFollowers from "../../components/HeaderFollowers";
+import { BorderlessButton } from "react-native-gesture-handler";
+import { Feather } from "@expo/vector-icons";
+import { Container, Text } from "./styles";
 import { useUser } from "../../hooks/ContextApi";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Seguindo({ navigation }) {
-  const { signIn, isSigned, setIsSigned } = useUser();
+export default function Seguidores({ navigation }) {
+  const { user, following } = useUser();
+
   return (
     <>
-      <Header style={{ zIndex: 10 }} greenArrowColor={"#539421"} />
+      <HeaderFollowers
+        style={{ zIndex: 10 }}
+        repositoriosSeguindo={user.following}
+      />
+
       <Container
-        style={{
-          flex: 1,
-          width: Dimensions.get("screen").width,
-          justifyContent: "space-between",
-        }}
-      >
-        <TouchableOpacity style={styles.imageContainer}>
-          <Image
-            source={{
-              uri: `https://avatars0.githubusercontent.com/u/51189721?v=4`,
-            }}
-            style={styles.imageSelected}
-          />
-        </TouchableOpacity>
-        <View style={styles.firstView}>
-          <View>
-            <View style={styles.yelloView1}></View>
-            <View style={styles.yelloView2}></View>
+        style={{ flex: 1 }}
+        data={following}
+        keyExtractor={(follow) => String(follow.id)}
+        showsVerticalScrollIndicator={false}
+        onEndReachedThreshold={0.2}
+        renderItem={({ item: follow }) => (
+          <View style={styles.bottomLine}>
+            <View style={styles.firstView}>
+              <View>
+                <View style={styles.yelloView1}></View>
+                <View style={styles.yelloView2}></View>
+              </View>
+              <Image
+                source={{
+                  uri: follow.avatar_url,
+                }}
+                style={styles.imageSelected}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  width: 250,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={styles.text}>#{follow.login}</Text>
+                <BorderlessButton
+                  onPress={navigation.goBack}
+                  style={styles.button}
+                >
+                  <Feather name="arrow-right" size={24} color="#E5E5E5" />
+                </BorderlessButton>
+              </View>
+            </View>
           </View>
-
-          <View styles={styles.personalInfoView}>
-            <Text style={styles.principal}>Rafael Paiva De Andrade</Text>
-            <Text style={styles.subPrincipal}>rafa_klose@hotmail.com</Text>
-            <Text style={styles.subPrincipal}>Itai/PE</Text>
-          </View>
-        </View>
-        <View style={styles.secondView}>
-          <View style={styles.statisticsView}>
-            <Text style={styles.number}>20</Text>
-            <Text style={styles.subPrincipal}>Seguidores</Text>
-          </View>
-          <View style={styles.statisticsView}>
-            <Text style={styles.number}>20</Text>
-            <Text style={styles.subPrincipal}>Seguindo</Text>
-          </View>
-          <View style={styles.statisticsView}>
-            <Text style={styles.number}>10</Text>
-            <Text style={styles.subPrincipal}>Repos</Text>
-          </View>
-        </View>
-        <View style={styles.thirdView}>
-          <View>
-            <View style={styles.yelloView1}></View>
-            <View style={styles.yelloView2}></View>
-          </View>
-
-          <View style={styles.personalInfBoView}>
-            <Text style={styles.principal}>Bio</Text>
-            <Text style={styles.subPrincipal}>
-              Web DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb DeveloperWeb
-              DeveloperWeb DeveloperWeb Developer
-            </Text>
-          </View>
-        </View>
-      </Container>
+        )}
+      />
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  imageSelected: {
-    borderColor: "#ddd",
-    borderWidth: 3,
-    width: 120,
-    height: 120,
-    borderRadius: 120 / 2,
-    marginTop: -60,
-    alignItems: "center",
-    alignSelf: "center",
+  text: {
+    color: "#ffffff",
+  },
+  bottomLine: {
+    borderBottomColor: "#BCBCBC",
+    borderWidth: 0.5,
   },
   firstView: {
     flexDirection: "row",
+    paddingTop: 20,
+    paddingBottom: 20,
+    alignItems: "center",
   },
   yelloView1: {
     width: 10,
@@ -105,37 +93,14 @@ const styles = StyleSheet.create({
     marginRight: 20,
     borderBottomRightRadius: 20 / 2,
   },
-  personalInfoView: {
-    flexDirection: "column",
-  },
-  secondView: {
-    backgroundColor: "#383838",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingHorizontal: 10,
-  },
-  thirdView: {
-    marginBottom: 100,
-    flexDirection: "row",
-  },
-  principal: {
-    color: "#ffffff",
-    fontSize: 25,
-  },
-  subPrincipal: {
-    fontSize: 16,
-    fontWeight: "200",
-    color: "#BCBCBC",
-  },
-  statisticsView: {
+  imageSelected: {
+    borderColor: "#ddd",
+    borderWidth: 3,
+    width: 70,
+    height: 70,
+    borderRadius: 70 / 2,
+    marginRight: 30,
     alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  number: {
-    color: "#ffffff",
-    fontSize: 40,
-    // marginLeft: 40,
+    alignSelf: "center",
   },
 });
