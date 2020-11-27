@@ -1,0 +1,1 @@
+Inizializar com: expo start.
