@@ -28,7 +28,7 @@ export default function HeaderFollower(props) {
             />
           </BorderlessButton>
         )}
-        <Text style={styles.hashtag}>#{props.emailSplitted}</Text>
+        <Text style={styles.hashtag}>#{props?.userLogin}</Text>
         <View style={styles.sairContainer}>
           {props.greenArrowColor ? (
             <Text style={styles.sair}> Salvar</Text>

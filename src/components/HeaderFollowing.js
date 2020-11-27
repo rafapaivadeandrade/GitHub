@@ -7,18 +7,16 @@ export default function HeaderFollowing(props) {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.superContainer}>
-      <View style={styles.container}>
-        <BorderlessButton onPress={navigation.goBack}>
-          <Feather name="arrow-left" size={24} color="#E5E5E5" />
-        </BorderlessButton>
-        <Text style={styles.repositorios}>
-          {props.repositoriosSeguindo
-            ? `${props.repositoriosSeguindo} Seguindo`
-            : `0 Seguindo`}
-        </Text>
-        <View style={styles.invisibleContainer}></View>
-      </View>
+    <View style={styles.container}>
+      <BorderlessButton onPress={navigation.goBack}>
+        <Feather name="arrow-left" size={24} color="#E5E5E5" />
+      </BorderlessButton>
+      <Text style={styles.repositorios}>
+        {props.repositoriosSeguindo
+          ? `${props.repositoriosSeguindo} Seguindo`
+          : `0 Seguindo`}
+      </Text>
+      <View style={styles.invisibleContainer}></View>
     </View>
   );
 }

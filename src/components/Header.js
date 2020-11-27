@@ -33,7 +33,7 @@ export default function Header(props) {
           </BorderlessButton>
         )}
         <Text style={styles.hashtag}>
-          #{props.hashtag ? props.hashtag[0] : ""}
+          #{props.hashtag ? props.hashtag : ""}
         </Text>
         <View style={styles.sairContainer}>
           {props.greenArrowColor ? (
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   hashtag: {
     color: "#ffffff",
     fontSize: 20,
-    maxWidth: 165,
+    maxWidth: 200,
   },
 
   sairContainer: {

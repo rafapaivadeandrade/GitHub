@@ -22,7 +22,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Header style={{ zIndex: 10 }} hashtag={emailSplitted} />
+      <Header style={{ zIndex: 10 }} hashtag={user.login} />
       <Container>
         <Image
           source={{

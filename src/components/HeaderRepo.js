@@ -7,18 +7,16 @@ export default function HeaderRepo(props) {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.superContainer}>
-      <View style={styles.container}>
-        <BorderlessButton onPress={navigation.goBack}>
-          <Feather name="arrow-left" size={24} color="#E5E5E5" />
-        </BorderlessButton>
-        <Text style={styles.repositorios}>
-          {props.repositoriosQuantidade
-            ? `${props.repositoriosQuantidade} Repositorios`
-            : `0 Repositorios`}
-        </Text>
-        <View style={styles.invisibleContainer}></View>
-      </View>
+    <View style={styles.container}>
+      <BorderlessButton onPress={navigation.goBack}>
+        <Feather name="arrow-left" size={24} color="#E5E5E5" />
+      </BorderlessButton>
+      <Text style={styles.repositorios}>
+        {props.repositoriosQuantidade
+          ? `${props.repositoriosQuantidade} Repositorios`
+          : `0 Repositorios`}
+      </Text>
+      <View style={styles.invisibleContainer}></View>
     </View>
   );
 }

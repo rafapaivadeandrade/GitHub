@@ -6,15 +6,7 @@ import { Error, Container, TextError } from "./styles";
 function Input({ name, ...rest }) {
   const inputRef = useRef(null);
 
-  const {
-    fieldName,
-    registerField,
-    defaultValue = "rafapaivadeandrade",
-    error,
-  } = useField(name);
-  useEffect(() => {
-    inputRef.current.value = defaultValue;
-  }, [defaultValue]);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -42,7 +34,6 @@ function Input({ name, ...rest }) {
         autoComplete={false}
         ref={inputRef}
         keyboardAppearance="light"
-        defaultValue={defaultValue}
         placeholderTextColor="#767676"
         style={styles.input}
         onChangeText={(value) => {
@@ -68,6 +59,7 @@ const styles = StyleSheet.create({
     maxWidth: 200,
     paddingHorizontal: 20,
     fontSize: 16,
+    borderBottomWidth: 0,
   },
 });
 

@@ -6,7 +6,6 @@ export const Container = styled.KeyboardAvoidingView`
   flex: 1;
   background-color: #1f1f1f;
   align-items: center;
-  /* justify-content: center; */
 `;
 export const ButtonPrimary = styled(RectButton)`
   margin-top: 20px;
